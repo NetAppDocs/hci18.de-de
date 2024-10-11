@@ -1,0 +1,64 @@
+---
+sidebar: sidebar 
+permalink: docs/task_mnode_access_ui.html 
+summary: Sie können auf die Management-UI oder DIE REST-API-UI zugreifen. 
+keywords: netapp, mnode, management node, api, hci 
+---
+= Greifen Sie auf den Management-Node zu
+:allow-uri-read: 
+
+
+[role="lead"]
+Ab der NetApp Element Softwareversion 11.3 enthält der Managementknoten zwei UIs: Eine Benutzeroberfläche für die Verwaltung VON REST-basierten Diensten und eine UI pro Node zum Verwalten von Netzwerk- und Clustereinstellungen sowie Betriebssystemtests und -Dienstprogrammen.
+
+Für Cluster mit Element Softwareversion 11.3 oder höher können Sie eine von zwei Schnittstellen verwenden:
+
+* Mit Hilfe der Management Node UI (`https:// [mNode IP}:442`) können Sie Änderungen an Netzwerk- und Cluster-Einstellungen vornehmen, Systemtests ausführen oder Systemdienstprogramme verwenden.
+* Mit der integrierten REST API UI (`https://[mNode IP}/mnode`) können Sie APIs im Zusammenhang mit den Management-Node-Services ausführen oder verstehen, einschließlich Proxy-Server-Konfiguration, Service-Level-Updates oder Asset-Management.
+
+
+
+
+== Greifen Sie über die UI auf den Management-Node zu
+
+Über die UI pro Node können Sie auf Netzwerk- und Cluster-Einstellungen zugreifen und Systemtests und Dienstprogramme verwenden.
+
+.Schritte
+. Greifen Sie auf die UI pro Node für den Management-Node zu, indem Sie die IP-Adresse des Management-Knotens eingeben, gefolgt von :442
++
+[listing]
+----
+https://[IP address]:442
+----
++
+image::mnode_per_node_442_ui.png[Management-Node pro Node UI]
+
+. Geben Sie bei der entsprechenden Eingabeaufforderung den Benutzernamen und das Passwort für den Management-Node ein.
+
+
+
+
+== Greifen Sie auf DIE REST-API-UI für den Management-Node zu
+
+Über DIE REST-API-UI erhalten Sie den Zugriff auf ein Menü mit Service-bezogenen APIs, die Managementservices auf dem Management-Node steuern.
+
+.Schritte
+. Um auf die REST-API-UI für Managementdienste zuzugreifen, geben Sie die Management-Node-IP-Adresse gefolgt von `/mnode`:
++
+[listing]
+----
+https://[IP address]/mnode
+----
++
+image::mnode_swagger_ui.png[REST-API-UI für den Management-Node]
+
+. Wählen Sie *autorisieren* oder ein Schloss-Symbol aus und geben Sie Cluster-Administrator-Anmeldeinformationen ein, um APIs zu verwenden.
+
+
+[discrete]
+== Weitere Informationen
+
+* link:task_mnode_enable_activeIQ.html["Active IQ- und NetApp HCI-Monitoring aktivieren"]
+* https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
+* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
+

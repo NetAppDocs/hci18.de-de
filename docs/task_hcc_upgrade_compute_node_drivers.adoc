@@ -1,0 +1,68 @@
+---
+sidebar: sidebar 
+permalink: docs/task_hcc_upgrade_compute_node_drivers.html 
+summary: Im Rahmen eines Upgrades des NetApp HCI Systems führen Sie ein Upgrade der Treiber für Computing-Nodes durch. 
+keywords: netapp, hci, on premise, cluster, element, compute node 
+---
+= Aktualisieren von Compute-Node-Treibern
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Für jeden H-Series Compute-Node können Sie die auf den Knoten verwendeten Treiber mit VMware Update Manager aktualisieren.
+
+.Was Sie benötigen
+Siehe Firmware und Treiber-Matrix für Ihre Hardware unter link:firmware_driver_versions.html["Unterstützte Firmware- und ESXi-Treiberversionen"].
+
+.Über diese Aufgabe
+Führen Sie jeweils nur einen dieser Aktualisierungsvorgänge aus.
+
+.Schritte
+. Navigieren Sie zur https://mysupport.netapp.com/site/products/all/details/netapp-hci/downloads-tab["NetApp HCI Software-Downloads"^] Seite, und wählen Sie den Download-Link für die richtige Version von NetApp HCI.
+. Wählen Sie in der Dropdown-Liste * ESXI_drivers* aus.
+. Akzeptieren Sie die Endnutzer-Lizenzvereinbarung.
+. Laden Sie das Treiberpaket für den Node-Typ und die ESXi-Version herunter.
+. Extrahieren Sie das heruntergeladene Treiberpaket auf Ihrem lokalen Computer.
++
+
+NOTE: Das NetApp Treiber-Paket enthält mindestens eine ZIP-Datei des VMware Offline Bundle; extrahieren Sie diese ZIP-Dateien nicht.
+
+. Nachdem Sie die Firmware auf den Rechenknoten aktualisiert haben, gehen Sie zu *VMware Update Manager* in VMware vCenter.
+. Importieren Sie die Treiber-Offline-Bundle-Datei für die Compute-Knoten in das *Patch-Repository*.
++
+** Für VMware ESXi 7.0 sind alle erforderlichen Treiber für die Compute-Nodes NetApp H610C, H615C, H410C und Hx00E und ihre integrierten Systemkomponenten im Standard-ISO-Image für die Installation von VMware ESXi 7.0 enthalten. Es sind keine zusätzlichen oder aktualisierten Treiber für NetApp HCI-Rechenknoten erforderlich, auf denen VMware ESXi 7.0 (und Updates) ausgeführt wird.
+** Führen Sie für VMware ESXi 6.x die folgenden Schritte durch, um die Treiber-Offline-Paketdatei zu importieren:
++
+... Wählen Sie die Registerkarte *Updates* aus.
+... WÄHLEN SIE *UPLOAD AUS DATEI*.
+... Navigieren Sie zu dem Offline-Paket, das zuvor heruntergeladen wurde, und wählen Sie *IMPORT*.
+
+
+
+
+. Erstellen einer neuen Host-Baseline für den Computing-Node
+. Wählen Sie *Host Extension* für Name und Typ und wählen Sie alle importierten Treiberpakete aus, die in die neue Baseline aufgenommen werden sollen.
+. Wählen Sie im Menü *Host und Cluster* in vCenter den Cluster mit den Compute Nodes aus, die Sie aktualisieren möchten, und navigieren Sie zur Registerkarte *Update Manager*.
+. Wählen Sie *optimieren* und wählen Sie die neu erstellte Host-Baseline aus. Stellen Sie sicher, dass die in der Basislinie enthaltenen Treiber ausgewählt sind.
+. Gehen Sie mit dem Assistenten zu den Optionen für die Fehlerbehebung * des Hosts durch und stellen Sie sicher, dass die Option *VM Power State* nicht ändern ausgewählt ist, um virtuelle Maschinen während der Treiberaktualisierung online zu halten.
++
+
+NOTE: Wenn der VMware Distributed Resource Scheduler (DRS) auf dem Cluster aktiviert ist (dies ist die Standardeinstellung in NetApp HCI-Installationen), werden virtuelle Maschinen automatisch zu anderen Knoten im Cluster migriert.
+
+. Gehen Sie im Assistenten zur Seite *bereit zum Abschließen* und wählen Sie *Fertig*.
++
+Die Treiber für alle Computing-Nodes im Cluster werden jeweils um einen Node aktualisiert, während Virtual Machines online bleiben.
+
+
+
+[discrete]
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
+* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
+

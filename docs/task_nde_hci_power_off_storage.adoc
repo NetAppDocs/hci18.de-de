@@ -1,0 +1,67 @@
+---
+sidebar: sidebar 
+permalink: docs/task_nde_hci_power_off_storage.html 
+summary: So schalten Sie die NetApp HCI Computing-Nodes aus. 
+keywords: netapp, hci, netapp deployment engine, deployment, vsphere 
+---
+= Schalten Sie die Storage-Ressourcen für ein NetApp HCI System aus
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Storage-Ressourcen für NetApp HCI ausgeschaltet werden, müssen die Storage-Nodes mit der `Shutdown` Element API Methode ordnungsgemäß angehalten werden.
+
+.Schritte
+Nachdem Sie die Computing-Ressourcen heruntergefahren haben, verwenden Sie einen Webbrowser, um alle Nodes des NetApp HCI Storage-Clusters abzuschalten.
+
+. Melden Sie sich beim Storage-Cluster an und vergewissern Sie sich, dass Sie mit dem richtigen MVIP verbunden sind.
+. (Optional) Stellen Sie sicher, dass alle I/O-Vorgänge von den Hosts angehalten wurden:
++
+.. Legen Sie die I/O-Vorgänge auf der Hostseite still, indem Sie die entsprechenden Befehle für die verwendeten Hypervisoren verwenden.
+.. Wählen Sie in der Cluster-Benutzeroberfläche *Reporting* > *Übersicht* aus. Im Diagramm „Cluster Input/Output“ sollte keine Aktivität stattfinden.
+.. Nachdem alle I/O-Vorgänge angehalten wurden, warten Sie 20 Minuten, bevor Sie das Cluster herunterfahren.
+
+
+. Vergewissern Sie sich, dass die Anzahl der iSCSI-Sitzungen null ist.
+. Navigieren Sie zu *Cluster > Nodes > aktiv*, und notieren Sie die Knoten-IDs für alle aktiven Knoten im Cluster.
+. Öffnen Sie zum Ausschalten des NetApp HCI Storage-Clusters einen Webbrowser und rufen Sie mithilfe der folgenden URL das Verfahren zum aus- und Ausschalten auf. Dabei `{MVIP}` handelt es sich um die Management-IP-Adresse des NetApp HCI Storage-Systems, und das `nodes=[]` Array enthält die Node-IDs, die Sie in Schritt 4 aufgezeichnet haben. Beispiel:
++
+[listing]
+----
+https://{MVIP}/json-rpc/1.0?method=Shutdown&nodes=[1,2,3,4]&option=halt
+----
++
+
+NOTE: Sie können den Befehl in einem Inkognito-Fenster ausführen, um zu vermeiden, dass er später von der gespeicherten URL aus erneut ausgeführt wird.
+
+. Geben Sie den Benutzernamen und das Passwort des Cluster-Administrators ein.
+. Überprüfen Sie, ob der API-Aufruf erfolgreich zurückgegeben wurde, indem Sie überprüfen, ob alle Speicher-Cluster-Nodes im Abschnitt des API-Ergebnisses enthalten sind `successful`.
++
+Sie haben alle NetApp HCI Storage-Nodes erfolgreich ausgeschaltet.
+
+. Schließen Sie den Browser oder die Registerkarte, um zu vermeiden, dass Sie die Schaltfläche „Zurück“ auswählen und den API-Aufruf wiederholen.
+
+
+[NOTE]
+====
+Wenn Sie das Cluster neu starten, müssen Sie bestimmte Schritte durchführen, um zu überprüfen, ob alle Nodes online sind:
+
+. Vergewissern Sie sich, dass alle kritischen Schweregrade und `volumesOffline` Cluster-Fehler gelöst sind.
+. Warten Sie 10 bis 15 Minuten, bis sich das Cluster absetzen lässt.
+. Starten Sie, um die Hosts für den Zugriff auf die Daten aufzurufen.
+
+
+Wenn Sie beim Einschalten der Knoten mehr Zeit einplanen und überprüfen möchten, ob sie nach der Wartung ordnungsgemäß sind, wenden Sie sich an den technischen Support, um Hilfe bei der Verzögerung der Datensynchronisierung zu erhalten, um unnötige bin-Synchronisierung zu vermeiden.
+
+====
+
+
+== Weitere Informationen
+
+* link:firmware_driver_versions.html["Unterstützte Firmware- und ESXi-Treiberversionen für NetApp HCI und Firmware-Versionen für NetApp HCI Storage Nodes"]
+

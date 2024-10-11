@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: docs/task_nde_hci_power_on_storage.html 
+summary: So schalten Sie die NetApp HCI Computing-Nodes aus. 
+keywords: netapp, hci, netapp deployment engine, deployment, vsphere 
+---
+= Schalten Sie Storage-Ressourcen für ein NetApp HCI System ein
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nachdem der geplante Ausfall abgeschlossen ist, können Sie NetApp HCI einschalten.
+
+.Schritte
+. Schalten Sie alle Storage-Nodes entweder mit dem physischen ein-/aus-Schalter oder dem BMC ein.
+. Wenn Sie den BMC verwenden, melden Sie sich bei jedem Knoten an und navigieren Sie zu *Fernbedienung > Energiekontrolle > Power On Server*.
+. Wenn alle Storage-Nodes online sind, melden Sie sich beim NetApp HCI Storage-System an und überprüfen Sie, ob alle Nodes funktionsfähig sind.
+
+
+[discrete]
+== Weitere Informationen
+
+* link:firmware_driver_versions.html["Unterstützte Firmware- und ESXi-Treiberversionen für NetApp HCI und Firmware-Versionen für NetApp HCI Storage Nodes"]
+

@@ -1,0 +1,50 @@
+---
+sidebar: sidebar 
+permalink: docs/task_mnode_remove_assets.html 
+summary: Erfahren Sie, wie Sie Compute-Node-Ressourcen mithilfe der REST API von Ihrem System entfernen. 
+keywords: netapp, hci, api, REST, remove, compute, asset 
+---
+= Entfernen Sie ein Asset vom Management-Node
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn ein Computing-Node physisch ersetzt oder aus dem NetApp HCI-Cluster entfernt werden muss, müssen die Computing-Node-Ressource mithilfe der Management-Node-APIs entfernt werden.
+
+.Was Sie benötigen
+* Im Storage Cluster wird die NetApp Element Software 11.3 oder höher ausgeführt.
+* Sie haben einen Management-Node mit Version 11.3 oder höher implementiert.
+
+
+.Schritte
+. Geben Sie die IP-Adresse des Verwaltungsknotens ein, gefolgt von `/mnode/1/`:
++
+[listing]
+----
+https://<ManagementNodeIP>/mnode/1/
+----
+. Wählen Sie *autorisieren* oder ein Schloss-Symbol aus und geben Sie Cluster-Administrator-Anmeldeinformationen ein, um APIs zu verwenden.
++
+.. Geben Sie den Benutzernamen und das Passwort für den Cluster ein.
+.. Wählen Sie *Text anfordern* aus der Dropdown-Liste Typ aus, wenn der Wert nicht bereits ausgewählt ist.
+.. Geben Sie die Client-ID so ein, als `mnode-client` ob der Wert noch nicht ausgefüllt ist.
+.. Geben Sie keinen Wert für das Clientgeheimnis ein.
+.. Wählen Sie *autorisieren*, um eine Sitzung zu starten.
+.. Schließen Sie das Fenster.
+
+
+. Schließen Sie das Dialogfeld * Verfügbare Berechtigungen*.
+. Wählen Sie *GET/Assets* aus.
+. Wählen Sie *Probieren Sie es aus*.
+. Wählen Sie *Ausführen*.
+. Scrollen Sie im Antworttext nach unten zum Abschnitt *Compute* und kopieren Sie die `parent` Werte und `id` für den fehlgeschlagenen Compute-Knoten.
+. Wählen Sie *DELETE/Assets/{Asset_id}/Compute-Nodes/{Compute_id}* aus.
+. Wählen Sie *Probieren Sie es aus*.
+. Geben Sie die Werte und `id` ein `parent`, die Sie in einem vorherigen Schritt kopiert haben.
+. Wählen Sie *Ausführen*.
+

@@ -1,0 +1,48 @@
+---
+sidebar: sidebar 
+permalink: docs/task_hci_removewn.html 
+summary: Nachdem Sie ein Storage-Cluster mit zwei Nodes auf vier oder mehr Nodes erweitert haben, können Sie das Paar Witness Nodes löschen, um Computing-Ressourcen in Ihrer NetApp HCI Installation freizumachen. 
+keywords: netapp, hci, witness nodes, two-node cluster, four-node cluster, compute nodes, virtual machine, vm 
+---
+= Entfernen Sie Witness Nodes nach dem erweitern des Clusters
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nachdem Sie ein Storage-Cluster mit zwei Nodes auf vier oder mehr Nodes erweitert haben, können Sie das Paar Witness Nodes löschen, um Computing-Ressourcen in Ihrer NetApp HCI Installation freizumachen. Die Witness Nodes, die zuvor vom Storage-Cluster verwendet wurden, sind weiterhin als Standby Virtual Machines (VM) im vSphere Web Client sichtbar.
+
+.Über diese Aufgabe
+Witness-Nodes sind in Clustern mit mehr als vier Storage-Nodes nicht erforderlich. Dies ist eine optionale Vorgehensweise, wenn Sie CPU und Arbeitsspeicher freigeben möchten, nachdem Sie Ihr Cluster mit zwei Nodes auf vier oder mehr Nodes erweitert haben.
+
+
+TIP: Vergewissern Sie sich, dass keine Cluster-Fehler oder -Fehler gemeldet werden. Sie können Informationen zu Systemwarnungen finden, indem Sie im Erweiterungspunkt NetApp Element-Verwaltung in vSphere *Reporting > Alerts* auswählen.
+
+.Schritte
+. Greifen Sie über vSphere auf die Registerkarte *Shortcuts* oder auf den Erweiterungspunkt für die NetApp Element-Verwaltung zu.
+. Wählen Sie *NetApp Element-Verwaltung > Cluster > Knoten*.
++
+image::vcp-witnessnode.gif[Zeigt die Seite NetApp Element-Verwaltung > Cluster mit den aufgeführten Nodes.]
+
+. Aktivieren Sie das Kontrollkästchen für den Witness Node, den Sie löschen möchten, und wählen Sie *Actions > Remove* aus.
+. Bestätigen Sie die Aktion in der Eingabeaufforderung.
+. Wählen Sie *Hosts und Cluster* aus.
+. Navigieren Sie zu der Witness Node VM, die Sie zuvor entfernt haben.
+. Klicken Sie mit der rechten Maustaste auf die VM, und schalten Sie sie aus.
+. Klicken Sie mit der rechten Maustaste auf die VM, die Sie ausgeschaltet haben, und wählen Sie *von Festplatte löschen* aus.
+. Bestätigen Sie die Aktion in der Eingabeaufforderung.
+
+
+
+
+== Weitere Informationen
+
+* https://www.netapp.com/pdf.html?item=/media/9489-tr-4823.pdf["NetApp HCI Storage Cluster mit zwei Nodes – TR-4823"^]
+* https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
+* https://www.netapp.com/us/documentation/hci.aspx["Ressourcen-Seite zu NetApp HCI"^]
+* http://docs.netapp.com/sfe-122/index.jsp["SolidFire und Element Software Documentation Center"^]
+

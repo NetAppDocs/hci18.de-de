@@ -1,0 +1,160 @@
+---
+sidebar: sidebar 
+permalink: docs/task_hcc_update_management_services.html 
+summary: Bei Upgrades eines NetApp HCI Systems sollten Sie die Managementservices aktualisieren. 
+keywords: netapp, hci, on premise, cluster, management services 
+---
+= Managementservices aktualisieren
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können Ihre Managementservices nach der Installation des Management Node 11.3 oder höher auf die neueste Bundle-Version aktualisieren.
+
+Seit der Version für Element 11.3 Management-Nodes wurde das Design der Management-Nodes auf Grundlage einer neuen modularen Architektur, die individuelle Services bietet, geändert. Diese modularen Services bieten zentrale und erweiterte Management-Funktionalität für NetApp HCI und SolidFire All-Flash-Storage-Systeme. Zu den Managementservices gehören Systemtelemetrie, Protokollierung und Update-Services, der QoSSIOC-Service für das Element Plug-in für vCenter Server, NetApp Hybrid Cloud Control und vieles mehr.
+
+.Über diese Aufgabe
+* Vor einem Upgrade der Element Software müssen Sie ein Upgrade auf das neueste Management Services Bundle durchführen.
+
+
+
+NOTE: Aktuelle Versionshinweise zu Management Services, in denen wichtige Services, neue Funktionen, Fehlerbehebungen und Problemumgehungen für die einzelnen Service-Pakete beschrieben werden, finden Sie unter https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/Management_services_for_Element_Software_and_NetApp_HCI/Management_Services_Release_Notes["Die Versionshinweise für Managementservices"^].
+
+.Was Sie benötigen
+Ab Management Services 2.20.69 müssen Sie die Endbenutzer-Lizenzvereinbarung (Endbenutzer License Agreement, EULA) akzeptieren und speichern, bevor Sie die NetApp Hybrid Cloud Control UI oder -API für Upgrade-Managementservices verwenden:
+
+. Öffnen Sie die IP-Adresse des Management-Node in einem Webbrowser:
++
+[listing]
+----
+https://<ManagementNodeIP>
+----
+. Melden Sie sich bei NetApp Hybrid Cloud Control an, indem Sie die Anmeldedaten des Storage-Cluster-Administrators bereitstellen.
+. Wählen Sie *Upgrade* oben rechts auf der Schnittstelle aus.
+. Die EULA erscheint. Scrollen Sie nach unten, wählen Sie *Ich akzeptiere aktuelle und alle zukünftigen Updates* und wählen Sie *Speichern*.
+
+
+.Update-Optionen
+Die Managementservices können mit der NetApp Hybrid Cloud Control UI oder DER REST-API des Management-Node aktualisiert werden:
+
+* <<Aktualisieren von Managementservices mit Hybrid Cloud Control>> (Empfohlene Methode)
+* <<Aktualisieren Sie Managementservices mit der Management-Node-API>>
+
+
+
+
+== Aktualisieren von Managementservices mit Hybrid Cloud Control
+
+Sie können Ihre NetApp Managementservices mit NetApp Hybrid Cloud Control aktualisieren.
+
+Management-Service-Bundles bieten erweiterte Funktionen und Korrekturen an Ihrer Installation außerhalb der größeren Versionen.
+
+.Was Sie benötigen
+* Sie führen Management-Node 11.3 oder höher aus.
+* Wenn Sie Managementservices auf Version 2.16 oder höher aktualisieren und einen Management-Node 11.3 bis 11.8 ausführen, müssen Sie vor der Aktualisierung der Managementservices den RAM der Management-Node-VM erhöhen:
++
+.. Schalten Sie die Management-Node-VM aus.
+.. Ändern Sie den RAM der Management-Node-VM von 12 GB in 24 GB RAM.
+.. Schalten Sie die Management-Node-VM ein.
+
+
+* In Ihrer Cluster-Version wird die NetApp Element Software 11.3 oder höher ausgeführt.
+* Sie haben ein Upgrade Ihrer Verwaltungsdienste auf mindestens Version 2.1.326 durchgeführt. Upgrades der NetApp Hybrid Cloud Control sind in früheren Servicepaketen nicht verfügbar.
+
+
+
+NOTE: Eine Liste der verfügbaren Services für jede Service-Bundle-Version finden Sie unter https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/Management_services_for_Element_Software_and_NetApp_HCI/Management_Services_Release_Notes["Versionshinweise Für Management Services"^].
+
+.Schritte
+. Öffnen Sie die IP-Adresse des Management-Node in einem Webbrowser:
++
+[listing]
+----
+https://<ManagementNodeIP>
+----
+. Melden Sie sich bei NetApp Hybrid Cloud Control an, indem Sie die Anmeldedaten des Storage-Cluster-Administrators bereitstellen.
+. Wählen Sie *Upgrade* oben rechts auf der Schnittstelle aus.
+. Wählen Sie auf der Seite Upgrades die Registerkarte *Management Services* aus.
++
+Auf der Registerkarte Management Services werden die aktuellen und verfügbaren Versionen der Management Services-Software angezeigt.
+
++
+
+NOTE: Wenn Ihre Installation nicht auf das Internet zugreifen kann, wird nur die aktuelle Softwareversion angezeigt.
+
+. Wenn Ihre Installation auf das Internet zugreifen kann und wenn ein Upgrade der Verwaltungsdienste verfügbar ist, wählen Sie *Upgrade beginnen*.
+. Wenn Ihre Installation keinen Zugriff auf das Internet hat, gehen Sie wie folgt vor:
++
+.. Befolgen Sie die Anweisungen auf der Seite, um ein Upgrade-Paket für Verwaltungsdienste auf Ihrem Computer herunterzuladen und zu speichern.
+.. Wählen Sie *Durchsuchen*, um das gespeicherte Paket zu finden und hochzuladen.
++
+Nach dem Hochladen des Pakets wird das Upgrade automatisch gestartet.
+
++
+Nach Beginn des Upgrades sehen Sie den Aktualisierungsstatus auf dieser Seite. Während des Upgrades besteht unter Umständen keine Verbindung zu NetApp Hybrid Cloud Control und muss sich erneut anmelden, um die Ergebnisse des Upgrades anzuzeigen.
+
+
+
+
+
+
+
+== Aktualisieren Sie Managementservices mit der Management-Node-API
+
+Benutzer sollten idealerweise Management-Services-Updates von NetApp Hybrid Cloud Control durchführen. Sie können jedoch ein Service Bundle-Update für Managementservices manuell über die REST-API hochladen, extrahieren und implementieren. Sie können jeden Befehl für den Management-Node von DER REST-API-UI ausführen.
+
+.Was Sie benötigen
+* Sie haben einen NetApp Element Software-Management-Node 11.3 oder höher implementiert.
+* Wenn Sie Managementservices auf Version 2.16 oder höher aktualisieren und einen Management-Node 11.3 bis 11.8 ausführen, müssen Sie vor der Aktualisierung der Managementservices den RAM der Management-Node-VM erhöhen:
++
+.. Schalten Sie die Management-Node-VM aus.
+.. Ändern Sie den RAM der Management-Node-VM von 12 GB in 24 GB RAM.
+.. Schalten Sie die Management-Node-VM ein.
+
+
+* In Ihrer Cluster-Version wird die NetApp Element Software 11.3 oder höher ausgeführt.
+* Sie haben ein Upgrade Ihrer Verwaltungsdienste auf mindestens Version 2.1.326 durchgeführt. Upgrades der NetApp Hybrid Cloud Control sind in früheren Servicepaketen nicht verfügbar.
++
+
+NOTE: Eine Liste der verfügbaren Services für jede Service-Bundle-Version finden Sie unter https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/Management_services_for_Element_Software_and_NetApp_HCI/Management_Services_Release_Notes["Versionshinweise Für Management Services"^].
+
+
+
+.Schritte
+. Öffnen Sie die REST-API-UI auf dem Management-Node: `https://<ManagementNodeIP>/mnode`
+. Wählen Sie *autorisieren* aus, und füllen Sie Folgendes aus:
++
+.. Geben Sie den Benutzernamen und das Passwort für den Cluster ein.
+.. Geben Sie die Client-ID so ein, als `mnode-client` ob der Wert noch nicht ausgefüllt ist.
+.. Wählen Sie *autorisieren*, um eine Sitzung zu starten.
+.. Schließen Sie das Fenster.
+
+
+. Laden Sie das Service-Bundle auf den Management-Node hoch und extrahieren Sie es mit diesem Befehl: `PUT /services/upload`
+. Bereitstellen der Managementservices auf dem Management-Node: `PUT /services/deploy`
+. Den Status der Aktualisierung überwachen: `GET /services/update/status`
++
+Ein erfolgreiches Update liefert ein Ergebnis, das dem folgenden Beispiel ähnelt:
+
++
+[listing]
+----
+{
+"current_version": "2.10.29",
+"details": "Updated to version 2.17.52",
+"status": "success"
+}
+----
+
+
+[discrete]
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
+* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
+

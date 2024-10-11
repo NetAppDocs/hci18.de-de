@@ -1,0 +1,126 @@
+---
+sidebar: sidebar 
+permalink: docs/task_nde_configure_net_settings.html 
+summary: Erfahren Sie, wie Sie die Netzwerkeinstellungen für die NetApp HCI-Bereitstellung konfigurieren. 
+keywords: netapp, hci, deployment, compatibility, nodes 
+---
+= Netzwerkeinstellungen konfigurieren
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+NetApp HCI stellt eine Seite mit Netzwerkeinstellungen mit einem einfachen Formular zur Vereinfachung der Netzwerkkonfiguration bereit. Wenn Sie das einfache Formular ausfüllen, füllt NetApp HCI automatisch einen Großteil der restlichen Informationen auf der Seite mit den Netzwerkeinstellungen aus. Sie können dann die endgültigen Netzwerkeinstellungen eingeben und überprüfen, ob die Netzwerkkonfiguration korrekt ist, bevor Sie fortfahren. Sie müssen das Formular nicht vollständig ausfüllen.
+
+.Was Sie benötigen
+* Sie haben folgende Informationen erhalten:
++
+** Das geplante Benennungspräfix für die Hosts und das Storage-Cluster
+** Alle geplanten Subnetzmaske, gestartet die IP-Adresse, das Standard-Gateway und VLAN-IDs für die Management-, iSCSI- und vMotion-Netzwerke
+** Die IP-Adresse, das Standard-Gateway, die VLAN-IDs und die Subnetzmaskeninformationen für jede geplante VMware vCenter-Bereitstellung
+** Die NTP-Serveradresse (Network Time Protocol) für NetApp HCI
+** Die IP-Adressdaten des DNS-Servers für NetApp HCI
+
+
+* Wenn Sie einen vSphere Distributed Switch bereitstellen, können Sie nach Abschluss der Bereitstellung eine vSphere Enterprise Plus-Lizenz anwenden.
+* Wenn Sie Node-Ports während der Konfiguration der Terminal User Interface (TUI) VLAN-IDs zugewiesen haben, haben Sie diese Ports während der Netzwerkkonfiguration mit derselben VLAN-ID konfiguriert. Sie müssen keine getaggten Host-Ports als Access-Ports oder native VLANs auf den verbundenen Switch-Ports konfigurieren.
+* Sie haben überprüft, ob die Netzwerk-Switch-Konfiguration korrekt ist. Falsche Switch-Konfigurationen (z. B. falsche VLANs oder MTU-Größe) verursachen Implementierungsfehler.
+
+
+.Über diese Aufgabe
+Wenn Sie die Netzwerktopologie mit zwei Kabeln für Computing-Nodes ausgewählt haben, müssen Sie für vMotion und Storage-Netzwerke für alle Computing- und Storage-Nodes in der Bereitstellung VLAN-IDs verwenden (für die Managementnetzwerke sind optionale IDs).
+
+
+NOTE: Wenn Sie vor der Implementierung Host-seitiges VLAN-Tagging erfordern, wenn Sie VLAN-IDs auf Computing- und Storage-Nodes konfiguriert haben, damit sie durch die NetApp Deployment Engine erkannt werden können, stellen Sie sicher, dass Sie bei der Konfiguration der Netzwerkeinstellungen in der NetApp Deployment Engine die richtigen VLANs verwenden.
+
+Wenn Sie einen Speicher-Cluster mit zwei oder drei Knoten bereitstellen, können Sie die IP-Adressinformationen für Witness Nodes auf der Seite *Network Settings* nach der Verwendung des einfachen Formulars ausfüllen.
+
+.Schritte
+. Optional: Um die Live-Validierung von Netzwerkinformationen zu deaktivieren, die Sie auf dieser Seite eingeben, schalten Sie den Schalter *Live Network validation is* auf *aus* um.
+. Geben Sie im Abschnitt *Infrastrukturdienste* der Seite *Netzwerkeinstellungen* die DNS- und NTP-Serverinformationen für NetApp HCI in die folgenden Felder ein:
++
+|===
+| Feld | Beschreibung 
+
+
+| *DNS Server IP-Adresse 1* | Die IP-Adresse des primären DNS-Servers für NetApp HCI. Wenn Sie auf der Seite vCenter Configuration einen DNS-Server angegeben haben, ist dieses Feld ausgefüllt und schreibgeschützt. 
+
+
+| *DNS Server IP-Adresse 2 (optional)* | Eine optionale IP-Adresse eines sekundären DNS-Servers für NetApp HCI. 
+
+
+| * NTP-Server-Adresse 1* | Die IP-Adresse oder der vollqualifizierte Domain-Name des primären NTP-Servers für diese Infrastruktur. 
+
+
+| *NTP-Serveradresse 2 (optional)* | Eine optionale IP-Adresse oder ein vollständig qualifizierter Domain-Name des sekundären NTP-Servers für diese Infrastruktur. 
+|===
+. Wählen Sie *um Zeit zu sparen, starten Sie das einfache Formular*, um weniger Netzwerkeinstellungen einzugeben.
++
+Das Dialogfeld *Network Settings Easy Form* wird angezeigt.
+
+. Geben Sie im Feld *Naming Prefix* ein Präfix für die Benennung ein.
++
+Das Namenspräfix wird auf den Namen jedes Hosts und den Namen des Storage-Clusters angewendet. Präfixe für die Benennung haben folgende Merkmale:
+
++
+** Nur mit einem Buchstaben beginnen
+** Kann Buchstaben, Zahlen und Bindestriche enthalten
+** Darf nicht mehr als 55 Zeichen enthalten
+
+
+. Wählen Sie eine der folgenden Optionen für das Zuweisen von VLAN-IDs aus.
++
+Wenn Sie das Formular verwenden, wählen Sie *Clear* neben einer Zeile aus, um die Eingabe aus einer Zeile von Feldern zu löschen.
+
++
+
+NOTE: Wenn Sie VLAN-IDs zuweisen, konfigurieren Sie VLAN-Tags, die NetApp HCI für den Netzwerkverkehr gelten. Sie müssen Ihr natives VLAN nicht als VLAN-ID eingeben. Um das native VLAN für ein Netzwerk zu verwenden, lassen Sie das entsprechende Feld leer.
+
++
+|===
+| Option | Schritte 
+
+
+| Weisen Sie VLAN-IDs zu  a| 
+.. Wählen Sie *Ja* für die Option *wird VLAN-IDs* zugewiesen.
+.. Geben Sie in der Spalte *VLAN ID* ein VLAN-Tag ein, das für jeden Netzwerkdatenverkehr verwendet werden soll, den Sie einem VLAN zuweisen möchten.
++
+Sowohl beim Computing-vMotion-Datenverkehr als auch beim iSCSI-Datenverkehr muss eine nicht gemeinsam genutzte VLAN-ID verwendet werden.
+
+.. Wählen Sie *Weiter*.
+.. Geben Sie in der Spalte *Subnetz* Subnetzdefinitionen im CIDR-Format für jeden Netzwerkdatenverkehr in jedem Netzwerk ein, z. B. 192.168.1.0/24.
+.. Geben Sie in der Spalte *Default Gateway* die IP-Adresse des Standard-Gateways für jeden Netzwerkdatenverkehr in jedem Netzwerk ein.
+.. Geben Sie in der Spalte *Starting IP* die erste nutzbare IP-Adresse für jedes Netzwerk-Subnetz in jedem Netzwerk ein.
+
+
+
+
+| Weisen Sie keine VLAN-IDs zu  a| 
+.. Wählen Sie *Nein* für die Option *wird VLAN-IDs* zugewiesen.
+.. Geben Sie in der Spalte *Subnetz* Subnetzdefinitionen im CIDR-Format für jeden Netzwerkdatenverkehr in jedem Netzwerk ein, z. B. 192.168.1.0/24.
+.. Geben Sie in der Spalte *Default Gateway* die IP-Adresse des Standard-Gateways für jeden Netzwerkdatenverkehr in jedem Netzwerk ein.
+.. Geben Sie in der Spalte *Starting IP* die erste nutzbare IP-Adresse für jeden Netzwerkdatenverkehr in jedem Netzwerk ein.
+
+
+|===
+. Wählen Sie *auf Netzwerkeinstellungen anwenden*.
+. Wählen Sie zur Bestätigung * Ja* aus.
++
+Dies füllt die Seite *Netzwerkeinstellungen* mit den Einstellungen aus, die Sie in der einfachen Form eingegeben haben. NetApp HCI validiert die von Ihnen eingegebenen IP-Adressen. Sie können diese Validierung mit der Schaltfläche Live Network Validation deaktivieren deaktivieren deaktivieren deaktivieren deaktivieren.
+
+. Überprüfen Sie, ob die automatisch ausgefüllten Daten korrekt sind.
+. Wählen Sie *Weiter*.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
+* https://www.netapp.com/us/documentation/hci.aspx["Ressourcen-Seite zu NetApp HCI"^]
+* http://docs.netapp.com/sfe-122/index.jsp["SolidFire und Element Software Documentation Center"^]
+

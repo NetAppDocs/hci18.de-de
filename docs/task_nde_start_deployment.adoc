@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: docs/task_nde_start_deployment.html 
+summary: Beginnen Sie mit der Bereitstellung von NetApp HCI. 
+keywords: netapp, hci, netapp deployment engine, deployment, engine, deploy, access 
+---
+= Starten Sie die Implementierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bevor Sie mit der NetApp HCI-Bereitstellung fortfahren können, müssen Sie die Endbenutzer-Lizenzvereinbarungen lesen und verstehen.
+
+.Schritte
+. Wählen Sie auf der Seite *Willkommen bei NetApp HCI* *erste Schritte*.
+. Gehen Sie auf der Seite *Voraussetzungen* wie folgt vor:
++
+.. Stellen Sie sicher, dass jede Voraussetzung erfüllt ist, und aktivieren Sie zur Bestätigung jedes zugehörigen Kontrollkästchens.
+.. Wählen Sie *Weiter*.
+
+
+. Gehen Sie auf der Seite *Endbenutzer-Lizenzen* wie folgt vor:
++
+.. Lesen Sie die Endbenutzer-Lizenzvereinbarung für NetApp
+.. Wenn Sie die Bedingungen akzeptieren, wählen Sie am Ende des Vertragstextes *Ich akzeptiere* aus.
+.. Lesen Sie die VMware-Endbenutzer-Lizenzvereinbarung.
+.. Wenn Sie die Bedingungen akzeptieren, wählen Sie am Ende des Vertragstextes *Ich akzeptiere* aus.
+.. Wählen Sie *Weiter*.
+
+
+
+
+[discrete]
+== Weitere Informationen
+
+* link:firmware_driver_versions.html["Unterstützte Firmware- und ESXi-Treiberversionen für NetApp HCI und Firmware-Versionen für NetApp HCI Storage Nodes"]
+

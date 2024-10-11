@@ -1,0 +1,39 @@
+---
+sidebar: sidebar 
+permalink: docs/task_hcc_upgrade_element_overview.html 
+summary: Im Rahmen eines Upgrades des NetApp HCI Systems führen Sie ein Upgrade der NetApp Element Software durch. 
+keywords: netapp, hci, on premise, cluster, element 
+---
+= Führen Sie ein Upgrade der Element Software auf Version 12.2 auf dem Storage-Cluster durch
+:allow-uri-read: 
+
+
+[role="lead"]
+Im Rahmen eines Upgrades des NetApp HCI oder SolidFire Storage-Systems führen Sie ein Upgrade der NetApp Element Software durch.
+
+Zum Upgrade der Storage-Node-Software müssen Sie die HealthTools Toolset verwenden.
+
+.Was Sie benötigen
+* Sie führen Management Node 11.0, 11.1 oder höher aus.
+* Sie haben ein Upgrade Ihrer Verwaltungsdienste auf mindestens Version 2.1.326 durchgeführt.
++
+Upgrades von NetApp Hybrid Cloud Control sind in früheren Servicepaket-Versionen nicht verfügbar.
+
+
+
+.Schritte
+. Ermitteln Sie die Elementversion auf dem Storage-Cluster.
+. Verwenden Sie HealthTools, um Prüfungen vor dem Upgrade durchzuführen.
+. Upgrade der Element Softwareversion
+. Aktualisieren Sie Ihre Element Softwareversion an dunklen Standorten.
+
+
+
+TIP: Informationen zur Anzahl der Storage- und Computing-Ressourcen finden Sie im NetApp Hybrid Cloud Control (HCC) Dashboard. Siehe link:task_hcc_dashboard.html["Zeigen Sie Speicher- und Rechenressourcen im HCC Dashboard an"].
+
+[discrete]
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
+* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
+

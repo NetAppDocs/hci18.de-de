@@ -1,0 +1,69 @@
+---
+sidebar: sidebar 
+permalink: docs/task_mnode_configure_proxy_server.html 
+summary: Über DIE REST API UI lassen sich Compute- und Controller-Ressourcen zur Management-Node-Konfiguration hinzufügen. 
+keywords: netapp, hci, mnode, api, management node, add proxy, proxy server 
+---
+= Konfigurieren Sie einen Proxyserver
+:allow-uri-read: 
+
+
+[role="lead"]
+Wenn Ihr Cluster hinter einem Proxy-Server liegt, müssen Sie die Proxy-Einstellungen so konfigurieren, dass Sie ein öffentliches Netzwerk erreichen können.
+
+Für Telemetrie-Kollektoren und Reverse-Tunnel-Verbindungen wird ein Proxy-Server verwendet. Sie können einen Proxy-Server mithilfe der REST API-UI aktivieren und konfigurieren, falls Sie während der Installation oder dem Upgrade noch keinen Proxy-Server konfiguriert haben. Sie können auch vorhandene Proxy-Server-Einstellungen ändern oder einen Proxy-Server deaktivieren.
+
+Der Befehl zum Konfigurieren von Updates für einen Proxy-Server und gibt dann die aktuellen Proxy-Einstellungen für den Management-Node zurück. Die Proxy-Einstellungen werden von Active IQ, dem NetApp HCI Monitoring-Service, der von der NetApp Deployment Engine implementiert wird, und anderen Element Software Utilities verwendet, die auf dem Management-Node installiert sind. Hierzu gehören auch der Tunnel zur Reverse-Unterstützung für NetApp Support.
+
+.Was Sie benötigen
+* Sie sollten Host- und Anmeldeinformationen für den Proxyserver kennen, den Sie konfigurieren.
+* Stellen Sie sicher, dass auf Ihrer Cluster-Version NetApp Element 11.3 oder höher ausgeführt wird.
+* Stellen Sie sicher, dass Sie einen Management-Node mit Version 11.3 oder höher bereitgestellt haben.
+* (Verwaltungsknoten 12.0 und 12.2) Sie haben NetApp Hybrid Cloud Control auf Verwaltungsdienste Version 2.16 aktualisiert, bevor Sie einen Proxyserver konfigurieren.
+
+
+.Schritte
+. Greifen Sie auf die REST-API-UI auf dem Management-Node zu, indem Sie die Management-Node-IP-Adresse gefolgt von `/mnode`:
++
+[listing]
+----
+https://<ManagementNodeIP>/mnode
+----
+. Wählen Sie *autorisieren* oder ein Schloss-Symbol aus, und füllen Sie Folgendes aus:
++
+.. Geben Sie den Benutzernamen und das Passwort für den Cluster ein.
+.. Geben Sie die Client-ID als `mnode-client`ein.
+.. Wählen Sie *autorisieren*, um eine Sitzung zu starten.
+.. Schließen Sie das Fenster.
+
+
+. Wählen Sie *PUT /settings*.
+. Wählen Sie *Probieren Sie es aus*.
+. Um einen Proxyserver zu aktivieren, müssen Sie auf true setzen `use_proxy`. Geben Sie die IP- oder Host-Namen und Proxy-Port-Ziele ein.
++
+Der Proxy-Benutzername, das Proxy-Passwort und der SSH-Port sind optional und sollten bei Nichtverwendung weggelassen werden.
+
++
+[listing]
+----
+{
+"proxy_ip_or_hostname": "[IP or name]",
+"use_proxy": [true/false],
+"proxy_username": "[username]",
+"proxy_password": "[password]",
+"proxy_port": [port value],
+"proxy_ssh_port": [port value: default is 443]
+}
+----
+. Wählen Sie *Ausführen*.
+
+
+
+NOTE: Je nach Umgebung müssen Sie möglicherweise Ihren Management Node neu booten.
+
+[discrete]
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
+* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
+

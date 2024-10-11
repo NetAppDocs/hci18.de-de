@@ -1,0 +1,58 @@
+---
+sidebar: sidebar 
+permalink: docs/task_nde_disable_lacp_individual.html 
+summary: 'Erfahren Sie, wie Sie nach der Bereitstellung von NetApp HCI den Befehl auf konfigurierten Switches deaktivieren `lacp-individual`.' 
+keywords: netapp, hci, deployment, review, deploy 
+---
+= Deaktivieren Sie den Befehl „lacp-individual“ bei konfigurierten Switches
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Standardmäßig bleiben der Mellanox-Switch `lacp-individual`-Befehl und der Cisco-Switch- `lacp suspend-individual`Befehl nach der Implementierung konfiguriert. Dieser Befehl ist nach der Installation nicht erforderlich. Wenn er weiterhin konfiguriert bleibt, kann er bei der Fehlerbehebung oder beim Neustart eines Switch zu Problemen mit dem Volume-Zugriff führen. Nach der Implementierung sollten Sie jede Mellanox-Switch- und Cisco-Switch-Konfiguration überprüfen und den Befehl oder `lacp suspend-individual` entfernen `lacp-individual`.
+
+.Schritte
+. Öffnen Sie mithilfe von SSH eine Sitzung für den Switch.
+. Zeigt die laufende Konfiguration an:
++
+`show running-config`
+
+. Überprüfen Sie die Switch-Konfigurationsausgabe für den `lacp-individual` Befehl oder `lacp suspend-individual`.
++
+
+NOTE: Das ist die `xxx-xxx` vom Benutzer angegebene(n) Schnittstellennummer(n). Falls erforderlich, können Sie auf die Schnittstellennummer zugreifen, indem Sie die Schnittstellen der Multi-Chassis Link Aggregation Group anzeigen: `show mlag interfaces`
+
++
+.. Überprüfen Sie bei einem Mellanox-Switch, ob die Ausgabe die folgende Zeile enthält:
++
+`interface mlag-port-channel xxx-xxx lacp-individual enable force`
+
+.. Überprüfen Sie bei einem Cisco-Switch, ob der Ausgang die folgende Zeile enthält:
++
+`interface mlag-port-channel xxx-xxx lacp suspend-individual enable force`
+
+
+
+. Wenn der Befehl vorhanden ist, entfernen Sie ihn aus der Konfiguration.
++
+.. Für einen Mellanox Switch:
++
+`no interface mlag-port-channel xxx-xxx lacp-individual enable force`
+
+.. Bei einem Cisco-Switch:
+`no interface mlag-port-channel xxx-xxx lacp suspend-individual enable force`
+
+
+. Wiederholen Sie diese Schritte für jeden Switch in Ihrer Konfiguration.
+
+
+[discrete]
+== Weitere Informationen
+
+* https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/SF_Series/SolidFire_Bond10G_goes_down_when_flapping_an_interface_during_troubleshooting["Der Storage-Node wird während der Fehlerbehebung heruntergefahren"^]
+

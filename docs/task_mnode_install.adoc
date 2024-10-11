@@ -1,0 +1,365 @@
+---
+sidebar: sidebar 
+permalink: docs/task_mnode_install.html 
+summary: Sie können den Management-Node für das Cluster installieren, auf dem die NetApp Element Software ausgeführt wird. 
+keywords: netapp, element, management node, mnode, storage, install 
+---
+= Installieren Sie einen Management-Node
+:allow-uri-read: 
+
+
+[role="lead"]
+Sie können den Management-Node für Ihr Cluster, auf dem die NetApp Element Software ausgeführt wird, manuell installieren. Verwenden Sie dabei das entsprechende Image für Ihre Konfiguration.
+
+Dieses Handbuch richtet sich an NetApp HCI-Administratoren, die die NetApp Deployment Engine nicht zur Installation von Management-Nodes verwenden.
+
+.Was Sie benötigen
+* In Ihrer Cluster-Version wird die NetApp Element Software 11.3 oder höher ausgeführt.
+* Ihre Installation verwendet IPv4. Der Management-Node 11.3 unterstützt IPv6 nicht.
++
+
+NOTE: Wenn IPv6 unterstützt werden soll, können Sie den Management-Node 11.1 verwenden.
+
+* Sie sind berechtigt, Software von der NetApp Support Site herunterzuladen.
+* Sie haben den für Ihre Plattform korrekten Managementknoten-Image-Typ identifiziert:
++
+[cols="30,30"]
+|===
+| Plattform | Bildtyp der Installation 
+
+
+| Microsoft Hyper-V | .iso 
+
+
+| KVM | .iso 
+
+
+| VMware vSphere | .iso, .ova 
+
+
+| Citrix XenServer | .iso 
+
+
+| OpenStack | .iso 
+|===
+* (Verwaltungsknoten 12.0 und 12.2 mit Proxyserver) Sie haben NetApp Hybrid Cloud Control auf Verwaltungsdienste Version 2.16 aktualisiert, bevor Sie einen Proxyserver konfigurieren.
+
+
+.Über diese Aufgabe
+Der Element 12.2 Management-Node ist ein optionales Upgrade. Bei bestehenden Implementierungen wird dieser Bedarf nicht benötigt.
+
+Bevor Sie dieses Verfahren befolgen, sollten Sie wissen, link:concept_hci_volumes.html#persistent-volumes["Persistente Volumes"]ob Sie diese verwenden möchten oder nicht. Persistente Volumes sind optional, jedoch im Falle eines Datenverlusts bei der Management-Node-Konfiguration empfohlen.
+
+.Schritte
+. <<Laden Sie ISO oder OVA herunter, und implementieren Sie die VM>>
+. <<Erstellen Sie den Management-Node-Administrator, und konfigurieren Sie das Netzwerk>>
+. <<Konfigurieren Sie die Zeitsynchronisierung>>
+. <<Richten Sie den Management-Node ein>>
+. <<Controller-Assets konfigurieren>>
+. <<Configure compute node assets,(Nur NetApp HCI) Konfigurieren der Ressourcen der Computing-Nodes>>
+
+
+
+
+== Laden Sie ISO oder OVA herunter, und implementieren Sie die VM
+
+. Laden Sie die OVA oder ISO für Ihre Installation von der Seite auf der NetApp Support-Website herunter https://mysupport.netapp.com/site/products/all/details/netapp-hci/downloads-tab["NetApp HCI"^]:
++
+.. Wählen Sie *Letzte Version herunterladen* und akzeptieren Sie die EULA.
+.. Wählen Sie das Management-Node-Image aus, das Sie herunterladen möchten.
+
+
+. Wenn Sie die OVA heruntergeladen haben, führen Sie die folgenden Schritte aus:
++
+.. OVA bereitstellen.
+.. Wenn sich Ihr Storage-Cluster in einem separaten Subnetz vom Management-Node (eth0) befindet und Sie persistente Volumes verwenden möchten, fügen Sie der VM im Storage-Subnetz einen zweiten NIC (Network Interface Controller) hinzu (z. B. eth1) oder stellen Sie sicher, dass das Managementnetzwerk zum Storage-Netzwerk weiterleiten kann.
+
+
+. Wenn Sie die ISO heruntergeladen haben, führen Sie die folgenden Schritte aus:
++
+.. Erstellen Sie mit der folgenden Konfiguration eine neue 64-Bit-VM aus Ihrem Hypervisor:
++
+*** Sechs virtuelle CPUs
+*** 24 GB RAM
+*** Speicheradaptertyp auf LSI Logic Parallel eingestellt
++
+
+IMPORTANT: Der Standard für Ihren Management-Node ist möglicherweise LSI Logic SAS. Überprüfen Sie im Fenster *New Virtual Machine* die Konfiguration des Speicheradapters, indem Sie *Hardware anpassen* > *Virtual Hardware* wählen. Ändern Sie bei Bedarf LSI Logic SAS in *LSI Logic Parallel*.
+
+*** 400 GB virtuelle Festplatte, Thin Provisioning
+*** Eine virtuelle Netzwerkschnittstelle mit Internetzugang und Zugriff auf den Speicher MVIP.
+*** Eine virtuelle Netzwerkschnittstelle mit Managementnetzwerk-Zugriff auf das Storage-Cluster. Wenn sich Ihr Storage-Cluster in einem separaten Subnetz vom Management-Node (eth0) befindet und Sie persistente Volumes verwenden möchten, fügen Sie der VM im Storage-Subnetz (eth1) einen zweiten NIC (Network Interface Controller) hinzu oder stellen Sie sicher, dass das Managementnetzwerk zum Speichernetzwerk umgeleitet werden kann.
++
+
+IMPORTANT: Schalten Sie die VM nicht ein, bevor Sie den Schritt angeben, der später in diesem Verfahren ausgeführt werden soll.
+
+
+
+.. Verbinden Sie die ISO mit der VM und starten Sie sie am .iso-Installations-Image.
++
+
+NOTE: Wenn Sie einen Management-Node mithilfe des Images installieren, kann dies zu einer Verzögerung von 30 Sekunden führen, bevor der Startbildschirm angezeigt wird.
+
+
+
+. Schalten Sie die VM nach Abschluss der Installation für den Management-Node ein.
+
+
+
+
+== Erstellen Sie den Management-Node-Administrator, und konfigurieren Sie das Netzwerk
+
+. Erstellen Sie über die Terminal User Interface (TUI) einen Management Node Admin User.
++
+
+TIP: Um durch die Menüoptionen zu navigieren, drücken Sie die nach-oben- oder nach-unten-Taste. Um durch die Tasten zu navigieren, drücken Sie Tab. Um von den Schaltflächen zu den Feldern zu wechseln, drücken Sie Tab. Um zwischen Feldern zu navigieren, drücken Sie die nach-oben- oder nach-unten-Taste.
+
+. Wenn im Netzwerk ein DHCP-Server (Dynamic Host Configuration Protocol) vorhanden ist, der IPs mit einer MTU (Maximum Transmission Unit) von weniger als 1500 Byte zuweist, müssen Sie die folgenden Schritte durchführen:
++
+.. Versetzen Sie den Management-Node vorübergehend in ein vSphere-Netzwerk ohne DHCP, z. B. iSCSI,.
+.. Starten Sie die VM neu, oder starten Sie das VM-Netzwerk neu.
+.. Konfigurieren Sie über TUI die korrekte IP-Adresse im Managementnetzwerk mit einer MTU größer oder gleich 1500 Bytes.
+.. Weisen Sie der VM das richtige VM-Netzwerk erneut zu.
+
+
++
+
+NOTE: Ein DHCP, der IPs mit einer MTU unter 1500 Byte zuweist, kann Sie verhindern, dass Sie das Management-Node-Netzwerk konfigurieren oder die Management-Node-UI verwenden.
+
+. Konfigurieren Sie das Management-Node-Netzwerk (eth0).
++
+
+NOTE: Wenn Sie eine zusätzliche NIC zur Isolierung des Speicherverkehrs benötigen, lesen Sie die Anweisungen zum Konfigurieren einer anderen NIC: link:task_mnode_install_add_storage_NIC.html["Konfigurieren eines Speicher-Netzwerkschnittstellentoncontrollers (NIC)"].
+
+
+
+
+
+== Konfigurieren Sie die Zeitsynchronisierung
+
+. Stellen Sie sicher, dass die Zeit zwischen dem Management-Node und dem Storage-Cluster mit NTP synchronisiert wird:
+
+
+
+NOTE: Ab Element 12.3 werden die Teilschritte a bis (e) automatisch ausgeführt. Fahren Sie für Management-Knoten 12.3 mit fort<<substep_f_install_config_time_sync,Unterschritt (f)>>, um die Konfiguration der Zeitsynchronisierung abzuschließen.
+
+. Melden Sie sich über SSH oder die vom Hypervisor bereitgestellte Konsole beim Management-Node an.
+. NTPD stoppen:
++
+[listing]
+----
+sudo service ntpd stop
+----
+. Bearbeiten Sie die NTP-Konfigurationsdatei `/etc/ntp.conf` :
++
+.. Kommentieren Sie die Standard-Server (`server 0.gentoo.pool.ntp.org`), indem Sie vor jedem einen hinzufügen `#`.
+.. Fügen Sie für jeden Standardzeitserver, den Sie hinzufügen möchten, eine neue Zeile hinzu. Die Standardzeitserver müssen die gleichen NTP-Server sein, die auf dem Speicher-Cluster verwendet werden, die Sie in verwenden werdenlink:task_mnode_install.html#set-up-the-management-node["Später Schritt"].
++
+[listing]
+----
+vi /etc/ntp.conf
+
+#server 0.gentoo.pool.ntp.org
+#server 1.gentoo.pool.ntp.org
+#server 2.gentoo.pool.ntp.org
+#server 3.gentoo.pool.ntp.org
+server <insert the hostname or IP address of the default time server>
+----
+.. Speichern Sie die Konfigurationsdatei nach Abschluss.
+
+
+. Erzwingen einer NTP-Synchronisierung mit dem neu hinzugefügten Server.
++
+[listing]
+----
+sudo ntpd -gq
+----
+. NTPD neu starten.
++
+[listing]
+----
+sudo service ntpd start
+----
+. [[substep_f_install_config_time_Sync]]Zeitsynchronisierung mit Host über den Hypervisor deaktivieren (im Folgenden ein VMware-Beispiel):
++
+
+NOTE: Wenn Sie den mNode in einer anderen Hypervisor-Umgebung als VMware bereitstellen, zum Beispiel vom .iso-Image in einer OpenStack-Umgebung, finden Sie in der Hypervisor-Dokumentation die entsprechenden Befehle.
+
++
+.. Periodische Zeitsynchronisierung deaktivieren:
++
+[listing]
+----
+vmware-toolbox-cmd timesync disable
+----
+.. Den aktuellen Status des Dienstes anzeigen und bestätigen:
++
+[listing]
+----
+vmware-toolbox-cmd timesync status
+----
+.. Überprüfen Sie in vSphere, ob das `Synchronize guest time with host` Kontrollkästchen in den VM-Optionen deaktiviert ist.
++
+
+NOTE: Aktivieren Sie diese Option nicht, wenn Sie zukünftige Änderungen an der VM vornehmen.
+
+
+
+
+
+
+NOTE: Bearbeiten Sie NTP nach Abschluss der Zeitsynchronisierung nicht, da es sich auf den NTP auswirkt, wenn Sie auf dem Management-Node ausführenlink:task_mnode_install.html#set-up-the-management-node["Setup-Befehl"].
+
+
+
+== Richten Sie den Management-Node ein
+
+. Konfigurieren und Ausführen des Management-Node-Setup-Befehls:
++
+
+NOTE: Sie werden aufgefordert, Passwörter in einer sicheren Eingabeaufforderung einzugeben. Wenn sich Ihr Cluster hinter einem Proxy-Server befindet, müssen Sie die Proxy-Einstellungen konfigurieren, damit Sie ein öffentliches Netzwerk erreichen können.
+
++
+[listing]
+----
+sudo /sf/packages/mnode/setup-mnode --mnode_admin_user [username] --storage_mvip [mvip] --storage_username [username] --telemetry_active [true]
+----
++
+.. Ersetzen Sie den Wert in [ ] Klammern (einschließlich der Klammern) für jeden der folgenden erforderlichen Parameter:
++
+
+NOTE: Die gekürzte Form des Befehlsnamens ist in Klammern ( ) und kann durch den vollständigen Namen ersetzt werden.
+
++
+*** *--mnode_admin_user (-mu) [username]*: Der Benutzername für das Administrator-Konto des Management-Node. Dies ist wahrscheinlich der Benutzername für das Benutzerkonto, mit dem Sie sich beim Management-Node anmelden.
+*** *--Storage_mvip (-SM) [MVIP-Adresse]*: Die virtuelle Management-IP-Adresse (MVIP) des Speicherclusters, auf dem Element Software ausgeführt wird. Konfigurieren Sie den Management-Node mit dem gleichen Storage-Cluster, den Sie während verwendet habenlink:task_mnode_install.html#configure-time-sync["Konfiguration von NTP-Servern"].
+*** *--Storage_username (-su) [username]*: Der Benutzername des Speicher-Cluster-Administrators für den durch den Parameter angegebenen Cluster `--storage_mvip`.
+*** *--Telemetrie_Active (-t) [true]*: Den Wert TRUE beibehalten, der die Datenerfassung zur Analyse durch Active IQ ermöglicht.
+
+
+.. (Optional): Fügen Sie dem Befehl Active IQ-Endpunkt-Parameter hinzu:
++
+*** *--Remote_Host (-rh) [AIQ_Endpunkt]*: Der Endpunkt, an dem Active IQ Telemetriedaten zur Verarbeitung gesendet werden. Wenn der Parameter nicht enthalten ist, wird der Standardendpunkt verwendet.
+
+
+.. (Empfohlen): Fügen Sie die folgenden persistenten Volume-Parameter hinzu. Ändern oder löschen Sie das Konto und die Volumes, die für die Funktion „persistente Volumes“ erstellt wurden, nicht, oder die Managementfunktion kann verloren gehen.
++
+*** *--use_persistent_Volumes (-pv) [true/false, default: False]*: Aktivieren oder deaktivieren Sie persistente Volumes. Geben Sie den Wert TRUE ein, um die Funktion persistenter Volumes zu aktivieren.
+*** *--persistent_Volumes_Account (-pva) [Account_Name]*: Wenn `--use_persistent_volumes` auf true gesetzt ist, verwenden Sie diesen Parameter und geben Sie den Namen des Speicherkontos ein, der für persistente Volumes verwendet wird.
++
+
+NOTE: Verwenden Sie einen eindeutigen Kontonamen für persistente Volumes, der sich von jedem vorhandenen Kontonamen im Cluster unterscheidet. Es ist von zentraler Bedeutung, dass das Konto für persistente Volumes getrennt von der übrigen Umgebung bleibt.
+
+*** *--persistent_Volumes_mvip (-pvm) [mvip]*: Geben Sie die virtuelle Management-IP-Adresse (MVIP) des Storage-Clusters ein, auf dem Element Software ausgeführt wird, die mit persistenten Volumes verwendet wird. Dies ist nur erforderlich, wenn vom Management-Node mehrere Storage-Cluster gemanagt werden. Wenn nicht mehrere Cluster verwaltet werden, wird der Standard-Cluster MVIP verwendet.
+
+
+.. Proxy-Server konfigurieren:
++
+*** *--use_Proxy (-up) [true/false, default: False]*: Aktivieren oder deaktivieren Sie die Verwendung des Proxy. Dieser Parameter ist erforderlich, um einen Proxyserver zu konfigurieren.
+*** *--Proxy_Hostname_or_ip (-pi) [Host]*: Der Proxy-Hostname oder die IP. Dies ist erforderlich, wenn Sie einen Proxy verwenden möchten. Wenn Sie dies angeben, werden Sie zur Eingabe aufgefordert `--proxy_port`.
+*** *--Proxy_username (-pu) [username]*: Der Proxy-Benutzername. Dieser Parameter ist optional.
+*** *--Proxy_password (-pp) [password]*: Das Proxy-Passwort. Dieser Parameter ist optional.
+*** *--Proxy_Port (-pq) [Port, Standard: 0]*: Der Proxy-Port. Wenn Sie dies angeben, werden Sie aufgefordert, den Proxy-Hostnamen oder IP (`--proxy_hostname_or_ip`) einzugeben.
+*** *--Proxy_SSH_Port (-ps) [Port, Standard: 443]*: Der SSH-Proxy-Port. Standardmäßig ist der Port 443.
+
+
+.. (Optional) Verwenden Sie die Parameterhilfe, wenn Sie zusätzliche Informationen über die einzelnen Parameter benötigen:
++
+*** *--help (-h)*: Gibt Informationen über jeden Parameter zurück. Parameter werden basierend auf der ursprünglichen Implementierung als erforderlich oder optional definiert. Die Parameteranforderungen für Upgrades und Neuimplementierungen können variieren.
+
+
+.. Führen Sie den `setup-mnode` Befehl aus.
+
+
+
+
+
+
+== Controller-Assets konfigurieren
+
+. Suchen Sie die Installations-ID:
++
+.. Melden Sie sich in einem Browser bei DER REST API-UI für den Management-Node an:
+.. Gehen Sie zum Speicher-MVIP und melden Sie sich an. Dadurch wird das Zertifikat für den nächsten Schritt akzeptiert.
+.. Öffnen Sie die REST API-UI für den Bestandsdienst auf dem Managementknoten:
++
+[listing]
+----
+https://<ManagementNodeIP>/inventory/1/
+----
+.. Wählen Sie *autorisieren* aus, und füllen Sie Folgendes aus:
++
+... Geben Sie den Benutzernamen und das Passwort für den Cluster ein.
+... Geben Sie die Client-ID als `mnode-client`ein.
+... Wählen Sie *autorisieren*, um eine Sitzung zu starten.
+
+
+.. Wählen Sie in DER REST API UI *GET ​/Installations* aus.
+.. Wählen Sie *Probieren Sie es aus*.
+.. Wählen Sie *Ausführen*.
+.. Kopieren Sie aus dem Antworttext von Code 200 den, und speichern Sie ihn `id` für die Installation, um ihn in einem späteren Schritt zu verwenden.
++
+Die Installation verfügt über eine Basiskonfiguration, die während der Installation oder eines Upgrades erstellt wurde.
+
+
+
+. (Nur NetApp HCI) Suchen Sie das Hardware-Tag für Ihren Computing-Node in vSphere:
++
+.. Wählen Sie den Host im vSphere Web Client Navigator aus.
+.. Wählen Sie die Registerkarte *Monitor* aus und wählen Sie *Hardwarezustand*.
+.. Die Node-BIOS-Hersteller und die Modellnummer werden aufgelistet. Kopieren und speichern Sie den Wert für `tag` die Verwendung in einem späteren Schritt.
+
+
+. Fügen Sie dem Management-Node bekannte Ressourcen ein vCenter Controller Asset zum NetApp HCI Monitoring (nur NetApp HCI Installationen) und zur Hybrid Cloud Control (für alle Installationen) hinzu:
++
+.. Greifen Sie auf die mnode Service API UI auf dem Management Node zu, indem Sie die Management Node IP-Adresse gefolgt von `/mnode`:
++
+[listing]
+----
+https://<ManagementNodeIP>/mnode
+----
+.. Wählen Sie *autorisieren* oder ein Schloss-Symbol aus, und füllen Sie Folgendes aus:
++
+... Geben Sie den Benutzernamen und das Passwort für den Cluster ein.
+... Geben Sie die Client-ID als `mnode-client`ein.
+... Wählen Sie *autorisieren*, um eine Sitzung zu starten.
+... Schließen Sie das Fenster.
+
+
+.. Wählen Sie *POST /Assets/{Asset_id}/Controllers* aus, um eine Unterressource des Controllers hinzuzufügen.
++
+
+NOTE: Es wird empfohlen, eine neue NetApp-HCC-Rolle in vCenter zu erstellen, um eine Controller-Unterressource hinzuzufügen. Diese neue NetApp HCC-Rolle beschränkt die Management Node Services-Ansicht auf reine NetApp Ressourcen. Siehe link:task_mnode_create_netapp_hcc_role_vcenter.html["Erstellen einer NetApp HCC-Rolle in vCenter"].
+
+.. Wählen Sie *Probieren Sie es aus*.
+.. Geben Sie im Feld *Asset_id* die ID der übergeordneten Basis ein, die Sie in die Zwischenablage kopiert haben.
+.. Geben Sie die erforderlichen Nutzlastwerte mit dem Typ und den vCenter-Anmeldedaten ein `vCenter`.
+.. Wählen Sie *Ausführen*.
+
+
+
+
+
+
+== (Nur NetApp HCI) Konfigurieren der Ressourcen der Computing-Nodes
+
+. (Nur für NetApp HCI) Hinzufügen einer Computing-Node-Ressource zu den bekannten Management-Node-Assets:
++
+.. Wählen Sie *POST /Assets/{Asset_id}/Compute-Nodes* aus, um eine Compute-Node-Unterressource mit Anmeldeinformationen für die Compute-Node-Ressource hinzuzufügen.
+.. Wählen Sie *Probieren Sie es aus*.
+.. Geben Sie im Feld *Asset_id* die ID der übergeordneten Basis ein, die Sie in die Zwischenablage kopiert haben.
+.. Geben Sie in der Nutzlast die erforderlichen Nutzlastwerte ein, die auf der Registerkarte „Modell“ definiert sind. Geben Sie als `type` ein und geben Sie das Hardware-Tag ein `ESXi Host`, das Sie in einem vorherigen Schritt für gespeichert `hardware_tag` haben.
+.. Wählen Sie *Ausführen*.
+
+
+
+
+[discrete]
+== Weitere Informationen
+
+* link:concept_hci_volumes.html#persistent-volumes["Persistente Volumes"]
+* link:task_mnode_add_assets.html["Fügen Sie dem Management-Node eine Ressource hinzu"]
+* link:task_mnode_install_add_storage_NIC.html["Konfigurieren Sie eine Speicher-NIC"]
+* https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
+* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
+

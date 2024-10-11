@@ -1,0 +1,76 @@
+---
+sidebar: sidebar 
+permalink: docs/reference_notices_hci.html 
+keywords: copyrights, notice, trademarks, patents, privacy, open source 
+summary: Rechtliche Hinweise ermöglichen den Zugriff auf Copyright-Erklärungen, Marken, Patente und mehr. 
+translate: false 
+---
+= Rechtliche Hinweise
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Rechtliche Hinweise ermöglichen den Zugriff auf Copyright-Erklärungen, Marken, Patente und mehr.
+
+
+
+== Urheberrecht
+
+link:https://www.netapp.com/company/legal/copyright/["https://www.netapp.com/company/legal/copyright/"^]
+
+
+
+== Marken
+
+NetApp, das NETAPP Logo und die auf der NetApp Markenseite aufgeführten Marken sind Marken von NetApp Inc. Andere Firmen- und Produktnamen können Marken der jeweiligen Eigentümer sein.
+
+link:https://www.netapp.com/company/legal/trademarks/["https://www.netapp.com/company/legal/trademarks/"^]
+
+
+
+== Patente
+
+Eine aktuelle Liste der NetApp Patente finden Sie unter:
+
+link:https://www.netapp.com/pdf.html?item=/media/11887-patentspage.pdf["https://www.netapp.com/pdf.html?item=/media/11887-patentspage.pdf"^]
+
+
+
+== Datenschutzrichtlinie
+
+link:https://www.netapp.com/company/legal/privacy-policy/["https://www.netapp.com/company/legal/privacy-policy/"^]
+
+
+
+== Open Source
+
+In den Benachrichtigungsdateien finden Sie Informationen zu Urheberrechten und Lizenzen von Drittanbietern, die in der NetApp Software verwendet werden.
+
+* link:../media/compute_firmware_bundle_2.146_notices.pdf["Hinweis zum Compute-Firmware-Bundle 2.146"^]
+* link:../media/storage_firmware_bundle_2.146_notices.pdf["Hinweis zum Speicher-Firmware-Paket 2.146"^]
+* link:../media/storage_firmware_bundle_2.99_notices.pdf["Hinweis zum Speicher-Firmware-Paket 2.99.2"^]
+* link:../media/compute_firmware_bundle_2.76_notices.pdf["Hinweis zum Compute-Firmware-Bundle 2.76"^]
+* link:../media/storage_firmware_bundle_2.76_notices.pdf["Hinweis zum Speicher-Firmware-Paket 2.76"^]
+* link:../media/compute_firmware_bundle_2.27_notices.pdf["Hinweis zum Compute Firmware Bundle 2.27"^]
+* link:../media/storage_firmware_bundle_2.27_notices.pdf["Hinweis zum Speicher-Firmware-Paket 2.27"^]
+* link:../media/compute_iso_notice.pdf["Hinweis zur ISO für die Rechner-Firmware"^]
+* link:../media/H610S_BMC_notice.pdf["Hinweis für H610S BMC"^]
+* link:../media/mgmt_svcs_2.23_notice.pdf["Hinweis zu Managementservices 2.23.64 (NetApp Element-Plug-in für VMware vCenter Server 5.1.12)"^]
+* link:../media/mgmt_svcs_2.22_notice.pdf["Hinweis zu Management Services 2.22.7 (NetApp Element-Plug-in für VMware vCenter Server 5.0.37)"^]
+* link:../media/mgmt_svcs_2.21_notice.pdf["Hinweis zu Managementservices 2.21.61 (NetApp Element-Plug-in für vCenter Server 4.10.12)"^]
+* link:../media/2.20_notice.pdf["Hinweis zu Managementservices 2.20.69 (NetApp Element-Plug-in für vCenter Server 4.9.14)"^]
+* link:../media/2.19.48_notice.pdf["Hinweis zu Managementservices 2.19.48 (NetApp Element-Plug-in für vCenter Server 4.8.34)"^]
+* link:../media/2.18.91_notice.pdf["Hinweis zu Managementservices 2.18.91 (NetApp Element-Plug-in für vCenter Server 4.7.10)"^]
+* link:../media/2.17.56-notice.pdf["Hinweis zu Managementservices 2.17.56 (NetApp Element-Plug-in für vCenter Server 4.6.32)"^]
+* link:../media/2.17_notice.pdf["Hinweis für Managementservices 2.17 (NetApp Element-Plug-in für vCenter Server 4.6.29)"^]
+* link:../media/2.16_notice.pdf["Hinweis zu Managementservices 2.16 (NetApp Element-Plug-in für vCenter Server 4.6.29)"^]
+* link:../media/mgmt_svcs_2.14_notice.pdf["Hinweis zu Managementservices 2.14 (NetApp Element-Plug-in für vCenter Server 4.5.42)"^]
+* link:../media/2.13_notice.pdf["Hinweis zu Managementservices 2.13 (NetApp Element-Plug-in für vCenter Server 4.5.42)"^]
+* link:../media/mgmt_svcs2.11_notice.pdf["Hinweis zu Managementservices 2.11 (NetApp Element-Plug-in für vCenter Server 4.4.72)"^]
+* https://library.netapp.com/ecm/ecm_download_file/ECMLP2870307["Hinweis für NetApp HCI 1.8"^]
+

@@ -1,0 +1,53 @@
+---
+sidebar: sidebar 
+permalink: docs/task_mnode_locate_hardware_tag.html 
+summary: Mithilfe der REST API-Benutzeroberfläche müssen Sie die Hardware-Tag-Nummer zur Konfiguration der Managementknoten hinzufügen. 
+keywords: netapp, management node, rest api, hci, hardware tag 
+---
+= So finden Sie ein Hardware-Tag für einen Compute-Node
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mithilfe der REST API-Benutzeroberfläche müssen Sie die Hardware-Tag-Nummer zur Konfiguration der Managementknoten hinzufügen.
+
+[role="tabbed-block"]
+====
+.VMware vSphere 7.0
+--
+Suchen Sie die Hardware-Tag-Nummer für einen Compute-Knoten in VMware vSphere Web Client 7.0.
+
+.Schritte
+. Wählen Sie den Host im vSphere Web Client Navigator aus.
+. Wählen Sie die Registerkarte *Konfigurieren* aus.
+. Wählen Sie in der Seitenleiste die Option *Hardware* > *Übersicht*. Prüfen Sie, ob das Hardware-Tag in der Tabelle aufgeführt `System` ist.
++
+image:../media/hw_tag_70.PNG["Screenshot der Systemtabelle"]
+
+. Kopieren und speichern Sie den Wert für *Tag*.
+. xref:task_mnode_add_assets.adoc[Fügen Sie Ihre Computing- und Controller-Ressourcen dem Management-Node hinzu].
+
+
+--
+.VMware vSphere 6.7 und 6.5
+--
+Suchen Sie in VMware vSphere Web Client 6.7 und 6.5 das Hardware-Tag für einen Computing-Knoten.
+
+.Schritte
+. Wählen Sie den Host im vSphere Web Client Navigator aus.
+. Wählen Sie die Registerkarte *Monitor* aus und wählen Sie *Hardwarezustand*.
+. Überprüfen Sie, ob das Tag mit dem BIOS-Hersteller und der Modellnummer aufgelistet ist.
++
+image:../media/hw_tag_67.PNG["Screenshot der Systemtabelle"]
+
+. Kopieren und speichern Sie den Wert für *Tag*.
+. xref:task_mnode_add_assets.adoc[Fügen Sie Ihre Computing- und Controller-Ressourcen dem Management-Node hinzu].
+
+
+--
+====
