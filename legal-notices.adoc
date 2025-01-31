@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: docs/reference_notices_hci.html 
+permalink: legal-notices.html 
 keywords: copyrights, notice, trademarks, patents, privacy, open source 
 summary: Rechtliche Hinweise ermöglichen den Zugriff auf Copyright-Erklärungen, Marken, Patente und mehr. 
 translate: false 

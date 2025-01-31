@@ -378,4 +378,4 @@ sidebar:
     - title: Storage-Node wird in einem 2-Node-Cluster ersetzt
       url: "/docs/task_hci_2noderepl.html"
   - title: Rechtliche Hinweise
-    url: "/docs/reference_notices_hci.html"
+    url: "/legal-notices.html"
