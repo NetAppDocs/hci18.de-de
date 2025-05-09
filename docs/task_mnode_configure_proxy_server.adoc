@@ -65,5 +65,4 @@ NOTE: Je nach Umgebung müssen Sie möglicherweise Ihren Management Node neu boo
 == Weitere Informationen
 
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 

@@ -391,5 +391,4 @@ Das Upgrade wurde erfolgreich abgeschlossen, wenn der `percent` Wert lautet `100
 == Weitere Informationen
 
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 

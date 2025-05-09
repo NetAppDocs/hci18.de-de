@@ -40,6 +40,5 @@ NOTE: In einer Konfiguration mit sechs Kabeln sind zwei Ports für VMware ESXi r
 [discrete]
 == Weitere Informationen
 
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Ressourcen-Seite zu NetApp HCI"^]
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
 

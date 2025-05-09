@@ -24,6 +24,5 @@ NOTE: Der Compute-Node H410C arbeitet nur mit Netzspannung (200-240 V AC). Sie m
 [discrete]
 == Weitere Informationen
 
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Ressourcen-Seite zu NetApp HCI"^]
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
 

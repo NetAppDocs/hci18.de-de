@@ -71,5 +71,4 @@ TIP: Verwenden Sie den `GET /services` Befehl, um Services auf dem Management-No
 == Weitere Informationen
 
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 

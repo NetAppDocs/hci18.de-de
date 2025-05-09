@@ -64,5 +64,4 @@ Die Treiber für alle Computing-Nodes im Cluster werden jeweils um einen Node ak
 == Weitere Informationen
 
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 

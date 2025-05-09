@@ -256,5 +256,4 @@ IMPORTANT: Wenn Sie die SSH-Funktion auf dem Management-Node zuvor deaktiviert h
 
 * link:concept_hci_volumes.html#persistent-volumes["Persistente Volumes"]
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 

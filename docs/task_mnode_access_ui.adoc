@@ -60,5 +60,4 @@ image::mnode_swagger_ui.png[REST-API-UI für den Management-Node]
 
 * link:task_mnode_enable_activeIQ.html["Active IQ- und NetApp HCI-Monitoring aktivieren"]
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 

@@ -19,6 +19,5 @@ Die NetApp Element Software unterstützt die Funktionalität von Sicherungsdomä
 [discrete]
 == Weitere Informationen
 
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Ressourcen-Seite zu NetApp HCI"^]
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
 

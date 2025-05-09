@@ -24,5 +24,4 @@ Mit NetApp HCI lassen sich diese Storage-Ressourcen mithilfe von NetApp Hybrid C
 
 * http://docs.netapp.com/sfe-122/index.jsp["SolidFire und Element 12.2 Documentation Center"^]
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 

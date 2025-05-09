@@ -155,6 +155,5 @@ Im Folgenden sind Sicherheitslücken aufgeführt, die in dieser Version behoben 
 == Weitere Informationen
 
 * https://docs.netapp.com/hci/index.jsp["NetApp HCI Documentation Center"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 * https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/SF_Series/How_to_update_iDRAC%2F%2FBIOS_firmware_on_SF_Series_nodes["KB: Aktualisieren der iDRAC/BIOS-Firmware auf SF Series-Knoten"^]
 

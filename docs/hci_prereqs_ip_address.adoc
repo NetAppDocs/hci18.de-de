@@ -70,6 +70,5 @@ NetApp HCI behält sich die folgenden IP-Adressbereiche für Systemkomponenten v
 [discrete]
 == Weitere Informationen
 
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Ressourcen-Seite zu NetApp HCI"^]
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
 

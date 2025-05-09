@@ -419,5 +419,4 @@ Bei den Storage-Zustandsprüfungen werden die folgenden Prüfungen pro Cluster d
 == Weitere Informationen
 
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 

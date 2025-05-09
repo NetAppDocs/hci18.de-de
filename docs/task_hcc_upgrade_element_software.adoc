@@ -706,5 +706,4 @@ NOTE: Wenn der Cluster auch keine H610S-Nodes aufweist, sind diese Nodes ohne H6
 == Weitere Informationen
 
 * https://docs.netapp.com/us-en/vcp/index.html["NetApp Element Plug-in für vCenter Server"^]
-* https://www.netapp.com/hybrid-cloud/hci-documentation/["Seite „NetApp HCI Ressourcen“"^]
 
